@@ -1,8 +1,9 @@
-﻿namespace RegisterUser.Repositories;
-using RegisterUser.Models;
+﻿using RegisterUser.Models;
+
+namespace RegisterUser.Repositories
 {
-    public class IUsersRepository
+    public interface IUsersRepository
     {
-        public void Add(User user);
+        void Add(User user);
     }
 }

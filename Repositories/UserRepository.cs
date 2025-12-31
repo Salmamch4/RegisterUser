@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace RegisterUser.Repositories
 {
-    public class UserRepository: IUsersRepository
+    public class UserRepository : IUsersRepository
     {
         IConfiguration configuration;
         public UserRepository(IConfiguration configuration)
@@ -15,10 +15,18 @@ namespace RegisterUser.Repositories
             SqlConnection cn = new SqlConnection(configuration.GetConnectionString("default"));
 
             cn.Open();
-            SqlCommand SqlCommand = new SqlCommand("insert into [User] values('" + u.email + "', '" + u.nom + "', '" + u.prenom + "', '" + u.password + ")", cn);
-            SqlCommand.ExecuteNonQuery();
 
+            SqlCommand cmd = new SqlCommand(
+                "INSERT INTO Users (Login, Nom, Prenom, Password, ConfirmPassword, tentatives, blocked) " +
+                "VALUES ('" + u.Login + "','" + u.Nom + "','" + u.Prenom + "','" +
+                u.Password + "','" + u.ConfirmPassword + "'," +
+                u.tentatives + "," + u.blocked + ")",
+                cn
+            );
 
+            cmd.ExecuteNonQuery();
             cn.Close();
+
         }
+    }
 }

@@ -30,7 +30,6 @@ namespace RegisterUser.Controllers
 
             }
             User user = UsersMapper.MapToUser(vm);
-            IUsersRepository repo = new IUsersRepository();
             repo.Add(user);
 
 
